@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Log>
+  <ModuleType>IVS_CU</ModuleType>               <!-- 日志路径是用户配置控制， 日志文件名称 -->
+  <LogBufferEnable>False</LogBufferEnable>        <!-- 写日志方式是缓存还是直接写（true为通过缓存），只对run和dbg日志生效 -->
+  <IsBufferDebugLog>False</IsBufferDebugLog>      <!-- 该开关只当debug日志关了的时候才有用，系统会缓存n条（n为下一个配置项）日志，当出现紧急级别日志时会把缓存的日志输出 -->
+  <BufferNumber>100</BufferNumber> 
+  <RunLog>
+    <FileNumber>5</FileNumber> <!--配置日志文件个数 5-10个之间有效-->
+    <FileSize>10</FileSize> <!--配置日志文件大小 10M-30M之间有效 单位M-->
+  </RunLog>
+  <DebugLog>
+    <DebugLogSwitch>False</DebugLogSwitch> <!--调试日志开关，false为不启动-->
+    <FileNumber>5</FileNumber>
+    <FileSize>10</FileSize>
+  </DebugLog>
+  <InterfaceLog>
+    <FileNumber>5</FileNumber>
+    <FileSize>10</FileSize>
+  </InterfaceLog>
+  <SecurityLog>
+    <SecurityLogSwitch>False</SecurityLogSwitch> <!--安全日志开关，false为不启动-->
+    <FileNumber>5</FileNumber>
+    <FileSize>10</FileSize>
+  </SecurityLog>
+  <OperationLog>
+    <OperationLogSwitch>True</OperationLogSwitch> <!--安全日志开关，false为不启动-->
+    <FileNumber>5</FileNumber>
+    <FileSize>10</FileSize>
+  </OperationLog>
+</Log>
+

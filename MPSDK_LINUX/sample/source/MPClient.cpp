@@ -128,7 +128,7 @@ int HttpPosts(const std::string & strUrl, const std::string & strPost, std::stri
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&strResponse);
 	curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10);
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);//设定为不验证证书和HOST  
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);//设定为不验证证书和HOST
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
 
 	res = curl_easy_perform(curl);
@@ -189,7 +189,7 @@ int HttpGet(const std::string & strUrl, std::string & strResponse)
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&strResponse);
 	curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10);
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10);
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);//设定为不验证证书和HOST  
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);//设定为不验证证书和HOST
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
 
 	res = curl_easy_perform(curl);
@@ -234,7 +234,7 @@ int login(std::string host, std::string userName, std::string password)
 	// 		if (key == "url") {
 	// 			g_strBaseURL = line.substr(pos + 1);
 	// 		}
-			
+
  //        } else {
  //            continue;
  //        }
@@ -269,7 +269,7 @@ int login(std::string host, std::string userName, std::string password)
 		return result["resultCode"].asInt();
 	}
 	else
-	{	
+	{
 		std::cout << "---login failed---"<< std::endl;
 		return -1;
 	}
@@ -295,7 +295,7 @@ int getUrl(std::string cameraCode, std::string startTime, std::string endTime, s
 	mediaURLParam["packProtocolType"] = 1;     //ES流
 	mediaURLParam["streamType"] = 1;           //主码流
 	mediaURLParam["protocolType"] = 2;         //1.UDP 2.TCP
-	mediaURLParam["transMode"] = 0;  
+	mediaURLParam["transMode"] = 0;
 	mediaURLParam["broadCastType"] = 0;
 	mediaURLParam["clientType"] = 0;           //下载采用MP媒体库
 	//mediaURLParam["supportTLS"] = 1;           //下载采用MP媒体库
@@ -355,6 +355,7 @@ void logout()
 
 void __SDK_CALL sdkEventCallBack(IVS_INT32 iEventType, IVS_VOID* pEventBuf, IVS_UINT32 uiBufSize, IVS_VOID* pUserData)
 {
+    std::cout << "iEventType is:" << iEventType << std::endl;
 	switch (iEventType)
 	{
 	case MP_EVENT_DOWNLOAD_SUCCESS:
@@ -427,7 +428,7 @@ int initHWMPSDK(const char * logPath)
 	return 0;
 }
 
-typedef struct 
+typedef struct
 {
 	char * filePath;
 	char * rtspUrl;
@@ -446,7 +447,7 @@ int HWMPDownLoadRecord(DownLoadPara * downLoadPara, unsigned long * handle)
 	recordParam.uiDownloadSpeed = 0;     //全速下载
 
     std::string time;
-	std::string recordStarttime; 
+	std::string recordStarttime;
 	std::string recordEndtime;
 
 	time = downLoadPara->starttime;
@@ -466,7 +467,7 @@ int HWMPDownLoadRecord(DownLoadPara * downLoadPara, unsigned long * handle)
 	recordParam.rtspUrl.uiProtocolType = 2;                                    //rtsp 传输类型
 	recordParam.rtspUrl.uiRtspType = 1;                                        //rtsp是否加密
 	//recordParam.rtspUrl.uiRtspType = 2;
-	recordParam.rtspUrl.rtspOverNorm = 0;               //精简RTSP协议 
+	recordParam.rtspUrl.rtspOverNorm = 0;               //精简RTSP协议
 	recordParam.uiRecordFormat = 1;                     //mp4文件格式
 	recordParam.uiSplitterType = 2;                     //按照容量分割
 	recordParam.uiSplitterValue = 8192;                 //最大为2G
@@ -526,7 +527,7 @@ int main(int argc, char *argv[])
 	{
 		std::cout << "initHWMPSDK  failed!\n";
 	 	return -1;
-	} 
+	}
 
     if(login(host, userName, password)==0)
 	{
@@ -547,7 +548,7 @@ int main(int argc, char *argv[])
 		std::cout << "getUrl  failed!\n";
 		return -1;
 	}
-  
+
 	//修改url, 新版本微云URL无需修改
 	//downloadUrl = downloadUrl.replace(downloadUrl.find("ClientType="), 12, "ClientType=0");
 	//std::cout << "rtspURL is: " << downloadUrl << std::endl;
@@ -560,7 +561,7 @@ int main(int argc, char *argv[])
 	downloadPara.filePath = (char *)filePath.c_str();
 	downloadPara.starttime = (char *)startTime.c_str();
 	downloadPara.endtime = (char *)endTime.c_str();
-	unsigned long handle; 
+	unsigned long handle;
 	if (0 == HWMPDownLoadRecord(&downloadPara, &handle))
 	{
 	    std::cout << "DownLoadRecord  succeed!\n";
@@ -580,7 +581,7 @@ int main(int argc, char *argv[])
 	 	std::cout << "uiProgress is:" << info.uiProgress << std::endl;
 	 	sleep(1);
 	}
-    
+
 	logout();
 
     //等待3S
